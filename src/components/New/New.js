@@ -40,7 +40,7 @@ const New = () => {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            db.collection("posts").add({
+            db.collection("products").add({
               name: name,
               price: price,
               description: description,
