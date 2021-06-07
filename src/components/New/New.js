@@ -147,14 +147,34 @@ const Container = styled.div`
 
 const MainContent = styled.div`
   background: #f1f1f1;
-  height: 550px;
+  height: 600px;
   margin: 50px 0;
   width: 800px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 1024px) {
+    height: 550px;
+    width: 600px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 450px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 330px;
+  }
 `;
 const Heading = styled.h1`
   border-bottom: 1px solid black;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.6rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 1.4rem;
+  }
 `;
 const HeadingContainer = styled.div`
   display: flex;
@@ -168,7 +188,14 @@ const InputContainer = styled.div`
   align-items: center;
   margin: 10px 0;
 `;
-const Title = styled.h3``;
+const Title = styled.h3`
+  @media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+`;
 const Input = styled.input`
   outline: none;
   border: none;
@@ -205,6 +232,27 @@ const Button = styled.button`
     color: #3f51b5;
     background-color: #f5f5f5;
     transition: all 1s;
+  }
+
+  @media screen and (max-width: 1024px) {
+    margin-right: 25px;
+    width: 75px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-right: 20px;
+    width: 70px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 481px) {
+    margin-right: 10px;
+    width: 55px;
+    height: 20px;
+    font-size: 0.7rem;
   }
 `;
 

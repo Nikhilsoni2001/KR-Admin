@@ -44,6 +44,5 @@ export default List;
 
 const Container = styled.div`
   background: #f1f1f1;
-  height: 89vh;
   padding-top: 10px;
 `;

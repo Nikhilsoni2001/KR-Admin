@@ -6,25 +6,26 @@ import { Modal, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 350,
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: "1px solid #000",
+    borderRadius: "8px",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+
+    "@media screen and (max-width: 481px)": {
+      width: 200,
+    },
   },
 }));
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
-    top: `${top}%`,
-    left: `${left}%`,
+    top: `${50}%`,
+    left: `${50}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
@@ -40,7 +41,6 @@ const Product = ({ id, name, description, quantity, price, type, image }) => {
   const [modalStyle] = useState(getModalStyle);
 
   const updateProduct = () => {
-    console.log("clicked");
     db.collection("products").doc(id).set({
       name: inpName,
       price: inpPrice,
@@ -57,7 +57,7 @@ const Product = ({ id, name, description, quantity, price, type, image }) => {
       <Modal open={openModal} onClose={(e) => setOpenModal(false)}>
         <div style={modalStyle} className={classes.paper}>
           <InputContainer>
-            <Title>Name: </Title>
+            <ModalTitle>Name: </ModalTitle>
             <Input
               type="name"
               placeholder="Enter item name"
@@ -67,7 +67,7 @@ const Product = ({ id, name, description, quantity, price, type, image }) => {
           </InputContainer>
 
           <InputContainer>
-            <Title>Price: </Title>
+            <ModalTitle>Price: </ModalTitle>
             <Input
               type="number"
               placeholder="Enter item price"
@@ -77,7 +77,7 @@ const Product = ({ id, name, description, quantity, price, type, image }) => {
           </InputContainer>
 
           <InputContainer>
-            <Title>Description: </Title>
+            <ModalTitle>Description: </ModalTitle>
             <TextArea
               placeholder="Enter Product Description"
               onChange={(event) => setInpDescription(event.target.value)}
@@ -86,7 +86,7 @@ const Product = ({ id, name, description, quantity, price, type, image }) => {
           </InputContainer>
 
           <InputContainer>
-            <Title>Quantity: </Title>
+            <ModalTitle>Quantity: </ModalTitle>
             <Input
               placeholder="Quantity"
               type="number"
@@ -96,7 +96,7 @@ const Product = ({ id, name, description, quantity, price, type, image }) => {
           </InputContainer>
 
           <InputContainer>
-            <Title>Type: </Title>
+            <ModalTitle>Type: </ModalTitle>
             <Select
               onChange={(event) => setInpType(event.target.value)}
               value={inpType}
@@ -148,24 +148,41 @@ const Container = styled.div`
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: all 0.6s ease;
   }
+
+  @media screen and (max-width: 481px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const LeftContainer = styled.div`
   text-align: center;
   display: flex;
-  margin: 10px;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 481px) {
+    display: block;
+  }
 `;
 const MiddleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2px 10px;
+
+  @media screen and (max-width: 481px) {
+    flex-direction: row;
+  }
 `;
 const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+
+  @media screen and (max-width: 481px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 const AboutSection = styled.div`
   display: flex;
@@ -173,21 +190,41 @@ const AboutSection = styled.div`
 `;
 const ProductImage = styled.img`
   width: 120px;
+
+  @media screen and (max-width: 1024px) {
+    width: 100px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 80px;
+  }
 `;
 const Title = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 2px;
   margin: 2px 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 const Description = styled.p`
-  margin: 2px 0 0 0;
+  margin-top: 2px;
   font-size: 0.8rem;
   color: #616161;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 const Quantity = styled.p`
   :before {
     content: "Qnt. ";
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem;
   }
 `;
 
@@ -211,6 +248,17 @@ const Button = styled.button`
     width: 95px;
     height: 35px;
   }
+  @media screen and (max-width: 768px) {
+    width: 90px;
+    height: 30px;
+  }
+
+  @media screen and (max-width: 481px) {
+    width: 70px;
+    height: 25px;
+    font-size: 0.8rem;
+    margin: 0 15px;
+  }
 `;
 const Price = styled.p`
   font-style: italic;
@@ -220,26 +268,46 @@ const Price = styled.p`
   :before {
     content: "Rs.";
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem;
+  }
+
+  @media screen and (max-width: 481px) {
+    margin-left: 10px;
+  }
 `;
 
 const Type = styled.p`
   :before {
     content: "Type: ";
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const InputContainer = styled.div`
   display: flex;
   height: 40px;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   margin: 10px 0;
+
+  @media screen and (max-width: 768px) {
+    margin: 6px;
+  }
 `;
 const Input = styled.input`
   outline: none;
   border: 1px solid;
   height: 25px;
   border-radius: 4px;
+
+  @media screen and (max-width: 768px) {
+    height: 20px;
+  }
 `;
 
 const Select = styled.select``;
@@ -252,4 +320,18 @@ const TextArea = styled.textarea`
   height: 50px;
   margin: 10px 0;
   border-radius: 4px;
+  @media screen and (max-width: 768px) {
+    height: 30px;
+  }
+`;
+
+const ModalTitle = styled(Title)`
+  @media screen and (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 481px) {
+    font-size: 0.7rem;
+    margin-right: 10px;
+  }
 `;

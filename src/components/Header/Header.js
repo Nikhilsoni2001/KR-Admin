@@ -29,16 +29,30 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 2px 20px;
   background: #f1f1f1;
-`;
-const LogoContainer = styled.div``;
-const NavTabs = styled.div`
-  display: flex;
-  margin: 0 10px;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    padding: 1px 10px;
+  }
+`;
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const NavTabs = styled.div`
+  diplay: flex;
 `;
 
 const Image = styled.img`
   height: 60px;
+
+  @media screen and (max-width: 1024px) {
+    height: 55px;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 50px;
+  }
 `;
 const Button = styled.button`
   margin-right: 30px;
@@ -46,8 +60,8 @@ const Button = styled.button`
   letter-spacing: 1px;
   border: none;
   width: 80px;
-  background: #3f51b5;
   height: 30px;
+  background: #3f51b5;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -56,5 +70,26 @@ const Button = styled.button`
     color: #3f51b5;
     background-color: #f5f5f5;
     transition: all 1s;
+  }
+
+  @media screen and (max-width: 1024px) {
+    margin-right: 25px;
+    width: 75px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-right: 20px;
+    width: 70px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 481px) {
+    margin-right: 10px;
+    width: 55px;
+    height: 20px;
+    font-size: 0.7rem;
   }
 `;
