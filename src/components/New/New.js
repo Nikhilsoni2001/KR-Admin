@@ -1,3 +1,4 @@
+import { Checkbox } from "@material-ui/core";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { db, storage } from "../../Firebase";
@@ -10,8 +11,7 @@ const New = () => {
   const [type, setType] = useState("");
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
-
-  console.log(type);
+  const [checked, setChecked] = useState(false);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -47,6 +47,7 @@ const New = () => {
               quantity: quantity,
               type: type,
               image: url,
+              bestseller: checked
             });
             setProgress(0);
             setName("");
@@ -123,6 +124,11 @@ const New = () => {
         <InputContainer>
           <Title>Image: </Title>
           <Input type="file" onChange={handleChange} />
+        </InputContainer>
+        
+        <InputContainer>
+          <Title>Bestseller </Title>
+          <Checkbox color={'primary'} checked={checked} onChange={() => setChecked(!checked)} />
         </InputContainer>
 
         <ProgressContainer>
